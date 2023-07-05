@@ -1,0 +1,45 @@
+{% extends 'base.html'%}
+
+{% block navbar %}
+<div class="navbar">
+<nav class="navbar navbar-expand-lg bg-body-tertiary">
+    <div class="container-fluid">
+      <a class="navbar-brand">Chat Room</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link" href="/logout">Logout</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+</nav>
+</div>
+{% endblock %}
+
+
+{% block content %}
+<div class="msg-box">
+    <div class="alert alert-success" role="alert">
+        You are logged in as {{name}}
+    </div>
+    <div class="messages" id="messages"></div>
+    <div class="input-group mb-3">
+        <input type="text" class="form-control" placeholder="Start typing..." aria-label="message" id="message">
+        <button class="btn btn-outline-secondary" type="button" name="send" id="send-button" onclick="send_msg()">Send</button>
+    </div>
+</div>
+<div class="details">
+    <h4>Room code: {{code}}</h4>
+    <p> Members: {{members+1}}</p>
+</div>
+<script type="text/javascript" src="{{ url_for('static', filename='index.js') }}"></script>
+{% for msg in messages %}
+<script type="text/javascript">
+    create_msg("{{msg['content']['name']}}", "{{msg['content']['message']}}", "{{msg['content']['time']}}")
+</script>
+{% endfor %}
+{% endblock %}

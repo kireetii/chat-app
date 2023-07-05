@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+
+{% block navbar %}
+<div class="navbar">
+<nav class="navbar navbar-expand-lg bg-body-tertiary">
+    <div class="container-fluid">
+      <a class="navbar-brand">Chat Room</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link" href="/logout">Logout</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+</nav>
+</div>
+{% endblock %}
+
+{% block content %}
+
+<form class="login" method="post">
+    {% if error %}
+    <div class="alert-msg">
+        <div class="alert alert-danger" role="alert">
+            {{ error}}
+        </div>
+    </div>
+    {% endif %}
+    <h3>Welcome {{name}}!</h3>
+    <div class="join">
+        <div class="create-btn">
+            <button type="submit" class="btn btn-primary" name="create">Create room</button>
+        </div>
+        <br />
+        <br />
+        <div class="mb-3">
+            <label class="form-label">Or join room using code</label>
+            <input type="text" class="form-control" placeholder="Room code" name="code" value="{{code}}" />
+        </div>
+        <button type="submit" class="btn btn-info" name="join">Join Room</button>
+    </div>
+</form>
+{% endblock %}
